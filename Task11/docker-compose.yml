@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  angular-app:
+    build: .
+    ports:
+      - "7070:80"
+    depends_on:
+      - backend-service
+
+  backend-service:
+    image: node:14
+    working_dir: /app/awesome-compose/angular/backend
+    volumes:
+      - ./backend:/app/awesome-compose/angular/backend
+    ports:
+      - "3000:3000"
+    command: sh -c "npm install && npm start"
